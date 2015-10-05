@@ -5,12 +5,13 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
+import com.sample.employeeInfo.DAO.DaoBase;
 import com.sample.employeeInfo.DAO.IRoleDAO;
 import com.sample.employeeInfo.domain.AutoFwRole;
 
 
 @Repository
-public class RoleDAOImpl implements IRoleDAO {
+public class RoleDAOImpl extends DaoBase implements IRoleDAO {
 	
 	@PersistenceContext
 	private EntityManager entityManager;

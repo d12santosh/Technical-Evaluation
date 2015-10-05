@@ -7,18 +7,22 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.sample.employeeInfo.DAO.DaoBase;
 import com.sample.employeeInfo.DAO.IUserDAO;
 import com.sample.employeeInfo.domain.AutoFwUser;
 
 @Repository
-public class UserDAOImpl implements IUserDAO {
+public class UserDAOImpl extends DaoBase implements IUserDAO {
 
-	@PersistenceContext
-	private EntityManager entityManager;
+	@Autowired
+	DaoBase baseDAO;
 	
-	
+	@Override
+	@Transactional
 	public AutoFwUser getUser(String login) {
 		
 		List<AutoFwUser> userList = new ArrayList<AutoFwUser>();
@@ -38,5 +42,26 @@ public class UserDAOImpl implements IUserDAO {
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
+
+	@Override
+	@Transactional
+	public AutoFwUser saveUser(AutoFwUser user) {
+		
+		return baseDAO.persist(user);
+	}
+
+	@Override
+	public AutoFwUser updateUser(AutoFwUser user) {
+		baseDAO.update(user);
+		return user;
+	}
+
+	@Override
+	public void deleteUser(AutoFwUser user) {
+		baseDAO.delete(user);
+		
+	}
+
+	
 
 }
