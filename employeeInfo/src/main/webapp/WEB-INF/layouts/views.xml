@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE tiles-definitions PUBLIC  
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="login" extends="landingPageTemplate">
+    <put-attribute name="body" 		value="/WEB-INF/jsp/login.jsp" />
+    
+</definition>
+
+    <!-- <definition name="testRunPage" extends="DefaultTemplate">
+    <put-attribute name="body" 		value="/WEB-INF/jsp/testRun.jsp" />
+    
+</definition>
+
+<definition name="createGroupPage" extends="DefaultTemplate">
+    <put-attribute name="body" 		value="/WEB-INF/jsp/createGroup.jsp" />
+    
+</definition>
+<definition name="testRunSelectionPage" extends="DefaultTemplate">
+    <put-attribute name="body" 		value="/WEB-INF/jsp/testRunSelectionPage.jsp" />
+    
+</definition>
+
+<definition name="testRunOCSPage" extends="DefaultTemplate">
+    <put-attribute name="body" 		value="/WEB-INF/jsp/testRunOCS.jsp" />
+    
+</definition>
+<definition name="testRunMHMEPage" extends="DefaultTemplate">
+    <put-attribute name="body" 		value="/WEB-INF/jsp/testRun.jsp" />
+    
+</definition>
+ -->
+ <definition name="welcome" extends="DefaultTemplate">
+    <put-attribute name="body" 		value="/WEB-INF/jsp/dashdoardPage.jsp" />
+    
+</definition>
+
+</tiles-definitions>
