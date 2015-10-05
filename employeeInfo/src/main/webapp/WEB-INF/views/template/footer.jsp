@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<div class="normalTextFooter" align="center">MGS Automation Management Tool 2015 - Version 1.0</div>
+<div class="normalTextFooter" align="center">Sample Application</div>
 
 </body>
 </html>

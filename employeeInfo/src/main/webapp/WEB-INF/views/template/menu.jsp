@@ -13,14 +13,7 @@
 <spring:url value="/welcome" var="homeUrl" htmlEscape="true" />
         <a href=<c:url value="/welcome"/>>Home</a>
 </div>
-<div class="menu-item-regular">
-<spring:url value="/createTestCaseGroup" var="createTestCaseGroupUrl" htmlEscape="true" />
-        <a href=<c:url value="/createTestCaseGroup"/>>Create Group</a>
-</div>
-<div class="menu-item-regular">
-<spring:url value=<c:url value="/testRunPageSelection"/> var="logoutUrl" htmlEscape="true" />
-        <a href=<c:url value="/testRunPageSelection"/>>Run Test Cases</a>
-</div>
+
 <div class="menu-item-regular">
 <spring:url value=<c:url value="/logout"/> var="logoutUrl" htmlEscape="true" />
         <a href=<c:url value="/logout"/>>Logout</a>
