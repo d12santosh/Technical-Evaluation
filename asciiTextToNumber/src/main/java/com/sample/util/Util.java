@@ -32,7 +32,6 @@ public class Util {
 				stack.push(remainder);
 				asciiValue = asciiValue/numberBase;
 			}
-			System.out.println(stack);
 			String newString = "";
 			while (!stack.isEmpty()) {
 				newString = newString+ DIGITS[stack.pop()];

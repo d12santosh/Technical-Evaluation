@@ -31,7 +31,7 @@ public class Number {
 			if(consoleScanner.next().equalsIgnoreCase("y")){
 			System.out.println("Plese Enter new Number base");
 			short newNumBase = consoleScanner.nextShort();
-			System.out.println(number.toString(newNumBase));
+			System.out.println("The Convrted Ascii Text from Base "+baseNumber+ "  is "+number.toString(newNumBase));
 			System.out.println("The Converted Values of new Base "+newNumBase+" are"+Number.getConvertedValues());
 			}
 			System.out.println("Please Enter 'Y' if you wish to restart the process or 'N' to exit");
