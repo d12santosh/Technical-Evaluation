@@ -14,21 +14,42 @@ public class Number {
 	public static void main(String[] args) {
 
 		Number number = Number.create("7ABC",(short) 2);
-		/*System.out.println(number.getConvertedValues());
-		System.out.println(number.getBaseNumber());*/
-		System.out.println("the final"+Number.toString((short)2));
+		
 	}
 
 	
 	
 	public static String toString(short numBase) {
-		/*System.out.println(Number.getBaseNumber());
-		System.out.println(Number.getConvertedValues());*/
+		
+		Queue<Integer> newconvertedValues = new LinkedList<Integer>();
+		
 		if(numBase==baseNumber){
 			return convertToStringFromBaseN(Number.getConvertedValues(),Number.getBaseNumber());
 		}
-		return null;
+		else{
+			for (Integer integer : convertedValues) {
+				int convertedAsciiValue = getConvertedAsciiValue(integer, baseNumber);
+				Integer convertToBaseN = convertToBaseN(convertedAsciiValue, numBase, 1);
+				newconvertedValues.add(convertToBaseN);
+			}
+			Number.setBaseNumber(numBase);
+			Number.setConvertedValues(newconvertedValues);
+			System.out.println(newconvertedValues);
+			String convertToStringFromBaseN = convertToStringFromBaseN(newconvertedValues,Number.getBaseNumber());
+			return convertToStringFromBaseN;
+		}
+		
 	}
+
+	private static Queue<Integer> convertBaseNToBaseM(Queue<Integer> convertedValues2, short baseNumber2, short numBase) {
+		
+		for (Integer integer2 : convertedValues2) {
+			getConvertedAsciiValue(integer2, baseNumber);
+		}
+return null;
+	}
+
+
 
 	private static String convertToStringFromBaseN(
 			Queue<Integer> convertedValues2, short baseNumber2) {
@@ -48,8 +69,7 @@ public class Number {
 
 	private static int getConvertedAsciiValue(Integer integer, short baseNumber2) {
 		
-		/*System.out.println("integer"+integer);
-		System.out.println(baseNumber2);*/
+	
 		List<Integer> convertIntegerToDigits = convertIntegerToDigits(integer);
 		System.out.println("converted "+integer+"to"+convertIntegerToDigits(integer));
 		Integer asciiValue = 0;
