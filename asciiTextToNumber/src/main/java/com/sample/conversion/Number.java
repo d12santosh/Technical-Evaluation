@@ -1,39 +1,50 @@
 package com.sample.conversion;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
-
-
-
-
-
+import java.util.Scanner;
 
 import com.sample.util.Util;
 
 
-
-
-
 public class Number {
-
-	
 
 	private static final int DEFAULT_POWER_OF_VLUE = 1;
 
 	private static Queue<Integer> convertedValues = new LinkedList<Integer>();
-	
+
 	private static short baseNumber= 0;
-	
+
 	public static void main(String[] args) {
 
-		Number number = Number.create("7ABCDEF",(short) 16);
-		System.out.println(Number.getConvertedValues());
-		System.out.println(number.toString((short)2));
+
+		Scanner consoleScanner = new Scanner(System.in);
+		boolean toRun = true;
+		while(toRun){
+			System.out.print("Please enter Ascii Text -");
+			String asciiText = consoleScanner.next();
+			System.out.print("Please enter num Base -");
+			short numBase =consoleScanner.nextShort();
+			Number number = Number.create(asciiText,numBase);
+			System.out.println("The Converted Values of Base "+numBase+" are"+Number.getConvertedValues());
+			System.out.println("Please Enter 'Y' if you wish to convert Number to Ascii Text or 'N' to exit");
+			if(consoleScanner.next().equalsIgnoreCase("y")){
+			System.out.println("Plese Enter new Number base");
+			short newNumBase = consoleScanner.nextShort();
+			System.out.println(number.toString(newNumBase));
+			System.out.println("The Converted Values of new Base "+newNumBase+" are"+Number.getConvertedValues());
+			}
+			System.out.println("Please Enter 'Y' if you wish to restart the process or 'N' to exit");
+			if(!consoleScanner.next().equalsIgnoreCase("y"))
+			{				
+				toRun = false;	 
+				consoleScanner.close();
+			}
+		}
 	}
-	
-	
-	
+
+
+
 	/**
 	 * This method is used to convert Ascii Text to the digits of given number base 
 	 * 
@@ -45,28 +56,28 @@ public class Number {
 	 */
 
 	public static Number create(String asciiText, short numBase) {
-		
+
 		Number.setBaseNumber(numBase);
 		try{
-		char[] chars = asciiText.toCharArray();
-	
-		for (char c : chars) {
-			int asciiValue = (int)c;
-			if(asciiValue>=32 && asciiValue <=127){
-			getConvertedValues().add(Util.convertToBaseN(asciiValue,numBase,DEFAULT_POWER_OF_VLUE));
+			char[] chars = asciiText.toCharArray();
+
+			for (char c : chars) {
+				int asciiValue = (int)c;
+				if(asciiValue>=32 && asciiValue <=127){
+					getConvertedValues().add(Util.convertToBaseN(asciiValue,numBase,DEFAULT_POWER_OF_VLUE));
+				}
+				else{
+					throw new Exception("Expecte Ascii Values");
+				}
 			}
-			else{
-				throw new Exception("Expecte Ascii Values");
-			}
-		}
-		 
-		return new Number();	
+
+			return new Number();	
 		}
 		catch(Exception e){
 			getConvertedValues().clear();
 			return null;
 		}
-		
+
 	}
 
 	/**
@@ -80,7 +91,7 @@ public class Number {
 	 */
 
 	public String toString(short numBase) {
-		
+
 		Queue<Integer> newconvertedValues = new LinkedList<Integer>();
 		if(numBase==baseNumber){
 			return Util.convertToStringFromBaseN(Number.getConvertedValues(),Number.getBaseNumber());
@@ -88,7 +99,7 @@ public class Number {
 		else{
 			for (Integer integer : convertedValues) {
 				int convertedAsciiValue = Util.getConvertedAsciiValue(integer, getBaseNumber());
-				Integer convertToBaseN = Util.convertToBaseN(convertedAsciiValue, numBase, 1);
+				Integer convertToBaseN = Util.convertToBaseN(convertedAsciiValue, numBase, DEFAULT_POWER_OF_VLUE);
 				newconvertedValues.add(convertToBaseN);
 			}
 			Number.setBaseNumber(numBase);
@@ -96,11 +107,11 @@ public class Number {
 			String convertToAsciiTextFromBaseN = Util.convertToStringFromBaseN(newconvertedValues,Number.getBaseNumber());
 			return convertToAsciiTextFromBaseN;
 		}
-		
+
 	}
 
-	
-	
+
+
 	public static short getBaseNumber() {
 		return baseNumber;
 	}
