@@ -1,14 +1,16 @@
 package com.sample.util;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 
 
 public class Util {
 	
-	
+	private static final char [] DIGITS =  {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 	
 	/**
 	 * This method is used to convert the ascii value to the digits of base N 
@@ -21,16 +23,22 @@ public class Util {
 	 * @return digits of ascii number of base 10 to given number base
 	 */
 	
-	public static Integer convertToBaseN(int asciiValue,int numberBase, int power)
+	public static String convertToBaseN(int asciiValue,int numberBase)
 	{
-		 Integer remainder = asciiValue%numberBase;
-
-		    if(asciiValue < numberBase){
-		        return new Double((Util.pow(10, power-1))*remainder.doubleValue()).intValue();
-		    }
-		    return convertToBaseN(asciiValue/numberBase, numberBase,power+1)+ 
-		            new Double(Util.pow(10, power-1)*remainder.doubleValue()).intValue();
+		 
+		 Stack<Integer> stack = new Stack<Integer>();
+			while(asciiValue>0){
+				int remainder = asciiValue%numberBase;
+				stack.push(remainder);
+				asciiValue = asciiValue/numberBase;
+			}
+			System.out.println(stack);
+			String newString = "";
+			while (!stack.isEmpty()) {
+				newString = newString+ DIGITS[stack.pop()];
+			}
 		
+			return newString;
 	}
 
 	/**
@@ -63,10 +71,10 @@ public class Util {
 	 * @return Ascii Text of the given digits of base N
 	 */
 	
-	public static String convertToStringFromBaseN(Queue<Integer> digitsList, short baseNumber) {
+	public static String convertToStringFromBaseN(Queue<String> digitsList, short baseNumber) {
 		StringBuilder builder = new StringBuilder();
 	int convertedAscIIValue = 0;	
-		for (Integer digits : digitsList) {
+		for (String digits : digitsList) {
 			convertedAscIIValue =	getConvertedAsciiValue(digits,baseNumber);
 			builder.append((char)convertedAscIIValue);
 		}
@@ -85,7 +93,7 @@ public class Util {
 	 * @return Ascii Text of the given digits of base N
 	 */
 	
-	public static int getConvertedAsciiValue(Integer digits, short baseNumber) {
+	public static int getConvertedAsciiValue(String digits, short baseNumber) {
 		
 		
 		List<Integer> convertIntegerToDigits = splitIntegerToSingleDigits(digits);
@@ -109,15 +117,14 @@ public class Util {
 	 * @return List of integers 
 	 */
 		
-	public static List<Integer> splitIntegerToSingleDigits(Integer number){
+	public static List<Integer> splitIntegerToSingleDigits(String number){
 		
-		if (number<0) number=-number; 
-		List<Integer> digits = new LinkedList<Integer>();
-
-		while (number>0) {
-		    digits.add(0, number%10);
-		    number=number/10;
+		List<Integer> numberList = new ArrayList<Integer>();
+		char[] charArray = number.toCharArray();
+		for (char c : charArray) {
+			numberList.add(Character.getNumericValue(c));
 		}
-		return digits;
+		return numberList;
+				 
 	}
 }

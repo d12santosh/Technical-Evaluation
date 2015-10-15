@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Queue;
 
 
+
+
+
 import org.junit.Test;
 
 import com.sample.util.Util;
@@ -27,9 +30,10 @@ public class TestUtil {
 	public void testConvertToBaseN() {
 		
 		char asciiText ='A';
+		int asciiValue = (int)asciiText;
 		int expectedValue =41;// 41 is base 16 value for ascii text 'A'
-		Integer actualValue = Util.convertToBaseN((int)asciiText, 16, 1);
-		assertTrue("The conversion of ascii vlaue to  base number is ",expectedValue==actualValue);
+		String actualValue = Util.convertToBaseN(asciiValue, 16);
+		assertTrue("The conversion of ascii vlaue to  base number is ",String.valueOf(expectedValue).equals(actualValue));
 		
 	}
 
@@ -52,8 +56,8 @@ public class TestUtil {
 	public void testConvertToStringFromBaseN() {
 		
 		String expectedText ="A";
-		Queue<Integer> digitsList = new LinkedList<Integer>();
-		digitsList.add(41); // 41 is base 16 value for ascii text 'A'
+		Queue<String> digitsList = new LinkedList<String>();
+		digitsList.add("41"); // 41 is base 16 value for ascii text 'A'
 		short numbase = 16;
 		String actualValue = Util.convertToStringFromBaseN(digitsList , numbase);
 		
@@ -68,7 +72,8 @@ public class TestUtil {
 	public void testGetConvertedAsciiValue() {
 		int expectedValue = 65;
 		short numbase = 16;
-		int actualValue = Util.getConvertedAsciiValue(41, numbase);
+		String base8ValueForA = "41";
+		int actualValue = Util.getConvertedAsciiValue(base8ValueForA, numbase);
 		assertTrue("The convrsion of digits of base N to number of base 10 ",expectedValue==actualValue);
 		
 	}
@@ -80,7 +85,7 @@ public class TestUtil {
 	public void testSplitIntegerToSingleDigits() {
 	
 		int expectedValue=2;
-		List<Integer> splitIntegerToSingleDigits = Util.splitIntegerToSingleDigits(12);
+		List<Integer> splitIntegerToSingleDigits = Util.splitIntegerToSingleDigits("12");
 		assertTrue("The size of digits splitted",expectedValue==splitIntegerToSingleDigits.size());
 		
 		

@@ -11,7 +11,7 @@ public class Number {
 
 	private static final int DEFAULT_POWER_OF_VLUE = 1;
 
-	private static Queue<Integer> convertedValues = new LinkedList<Integer>();
+	private static Queue<String> convertedValues = new LinkedList<String>();
 
 	private static short baseNumber= 0;
 
@@ -60,11 +60,11 @@ public class Number {
 		Number.setBaseNumber(numBase);
 		try{
 			char[] chars = asciiText.toCharArray();
-
+			getConvertedValues().clear();
 			for (char c : chars) {
 				int asciiValue = (int)c;
 				if(asciiValue>=32 && asciiValue <=127){
-					getConvertedValues().add(Util.convertToBaseN(asciiValue,numBase,DEFAULT_POWER_OF_VLUE));
+					getConvertedValues().add(Util.convertToBaseN(asciiValue,numBase));
 				}
 				else{
 					throw new Exception("Expecte Ascii Values");
@@ -92,14 +92,14 @@ public class Number {
 
 	public String toString(short numBase) {
 
-		Queue<Integer> newconvertedValues = new LinkedList<Integer>();
+		Queue<String> newconvertedValues = new LinkedList<String>();
 		if(numBase==baseNumber){
 			return Util.convertToStringFromBaseN(Number.getConvertedValues(),Number.getBaseNumber());
 		}
 		else{
-			for (Integer integer : convertedValues) {
+			for (String integer : convertedValues) {
 				int convertedAsciiValue = Util.getConvertedAsciiValue(integer, getBaseNumber());
-				Integer convertToBaseN = Util.convertToBaseN(convertedAsciiValue, numBase, DEFAULT_POWER_OF_VLUE);
+				String convertToBaseN = Util.convertToBaseN(convertedAsciiValue, numBase);
 				newconvertedValues.add(convertToBaseN);
 			}
 			Number.setBaseNumber(numBase);
@@ -120,11 +120,11 @@ public class Number {
 		Number.baseNumber = baseNumber;
 	}
 
-	public static Queue<Integer> getConvertedValues() {
+	public static Queue<String> getConvertedValues() {
 		return convertedValues;
 	}
 
-	public static void setConvertedValues(Queue<Integer> convertedValues) {
+	public static void setConvertedValues(Queue<String> convertedValues) {
 		Number.convertedValues = convertedValues;
 	}
 
